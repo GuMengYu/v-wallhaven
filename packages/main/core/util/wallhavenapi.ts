@@ -1,5 +1,5 @@
-const axios = require('axios')
-const cheerio = require('cheerio')
+import axios from 'axios'
+import cheerio from 'cheerio'
 export default {
   '/wallhaven/search': async (req, res) => {
     const { query: params } = req

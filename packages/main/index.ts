@@ -9,6 +9,7 @@ import { registerIpcMain } from './core/ipcMain'
 import { createElectronMenu } from './core/menu'
 import { createTray } from './core/tray'
 import { installExtensions } from './core/util/extensions'
+import { useWallpaperServer } from './core/wallpaperServer'
 import WindowManager from './core/windowManager'
 
 let appStaticServer: http.Server
@@ -77,6 +78,7 @@ function handleAppEvent() {
       // web静态资源express托管
       appStaticServer = useStaticServer()
     }
+    useWallpaperServer()
     wm = new WindowManager()
     const window = await wm.openWindow()
     if (window) {

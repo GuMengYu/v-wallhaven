@@ -23,6 +23,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "cheerio": "^1.0.0-rc.11",
     "dotenv": "^16.0.1",
     "electron-devtools-installer": "^3.2.0",
@@ -46,6 +47,7 @@
     "@vueuse/components": "^8.4.2",
     "@vueuse/core": "^8.2.5",
     "@vueuse/electron": "^8.3.1",
+    "@vueuse/gesture": "^2.0.0-beta.1",
     "commitizen": "^4.2.4",
     "cz-conventional-changelog": "^3.3.0",
     "dayjs": "^1.11.1",

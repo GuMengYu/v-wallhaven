@@ -16,6 +16,10 @@ export enum CATGORY {
   ANIME = 'anime',
   PEOPLE = 'people',
 }
+export enum SOURCE {
+  WALLHAVEN,
+  BING,
+}
 export interface SettingState {
   locale: string
   appearance: APPEARANCE
@@ -25,10 +29,8 @@ export interface SettingState {
     lightColors: null | Record<string, string>
   }
   rail: boolean
-  quality: number
+  source: SOURCE
   cacheLimit: number
-  volume: number
-  account: Record<string, string>
 }
 export const useSettingStore = defineStore('setting', {
   state: () => {
@@ -41,10 +43,8 @@ export const useSettingStore = defineStore('setting', {
         lightColors: null,
       },
       rail: false,
-      quality: 320000,
+      source: SOURCE.WALLHAVEN,
       cacheLimit: 500,
-      volume: 0.8,
-      account: {},
     })
   },
 })

@@ -1,22 +1,15 @@
 <template>
-  <app-title path="common.other" class="mb-2 pl-1" />
+  <app-title path="common.source" class="mb-2 pl-1" />
 
-  <v-list-item>
-    <v-list-item-header>
-      <v-list-item-title>{{ $t('common.language') }}</v-list-item-title>
-    </v-list-item-header>
-    <v-list-item-media>
-      <App-Select v-model="lang" :items="localeOptions" />
-    </v-list-item-media>
-  </v-list-item>
-  <v-list-item>
-    <v-list-item-header>
-      <v-list-item-title>{{ $t('common.source') }}</v-list-item-title>
-    </v-list-item-header>
-    <v-list-item-media>
-      <App-Select v-model="source" :items="sourceOptions" />
-    </v-list-item-media>
-  </v-list-item>
+  <v-expansion-panels :elevation="0">
+    <v-expansion-panel title="wallhaven">
+      <v-expansion-panel-text>
+        <v-chip> good </v-chip>
+      </v-expansion-panel-text>
+    </v-expansion-panel>
+    <v-expansion-panel title="bing"> </v-expansion-panel>
+  </v-expansion-panels>
+
   <v-divider class="mt-4 mb-3 mx-n3" />
 </template>
 <script setup lang="ts">

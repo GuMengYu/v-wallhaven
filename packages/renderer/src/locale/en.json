@@ -131,7 +131,9 @@
     "shortcut": "Shortcut",
     "queue": "Queue",
     "current_play": "Current Playing",
-    "next_from": "Next Track"
+    "next_from": "Next Track",
+    "list": "list mode",
+    "source": "picture source"
   },
   "theme": {
     "RedSandDunes": "Red Sand Dunes",

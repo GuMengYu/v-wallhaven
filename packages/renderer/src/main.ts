@@ -1,3 +1,4 @@
+import { GesturePlugin } from '@vueuse/gesture'
 import { createApp } from 'vue'
 
 import App from './App.vue'
@@ -19,6 +20,7 @@ useFonts()
 import './styles/animate.scss'
 import './styles/global.scss'
 import './styles/utility.scss'
+
 import is from '@/util/is'
 
 const app = createApp(App)
@@ -32,6 +34,7 @@ useDirectives(app)
 useDayjs(app)
 useElectron()
 useContextMenu(app)
+app.use(GesturePlugin)
 app.mount('#app').$nextTick(() => {
   is.electron() && window.removeLoading()
 })

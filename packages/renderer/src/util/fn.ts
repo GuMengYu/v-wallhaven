@@ -125,7 +125,7 @@ export function imageToDataUrl(image: HTMLImageElement) {
  * 从远程获取图片，并转换成DataURL
  * @param url
  */
-export function getImageDataUrl(url: string) {
+export function getImageDataUrl(url: string): Promise<string> {
   return new Promise((resolve, reject) => {
     const image = new Image()
     image.setAttribute('crossOrigin', 'Anonymous')

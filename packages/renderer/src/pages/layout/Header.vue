@@ -1,15 +1,14 @@
 <template>
-  <v-app-bar class="app_header drag-area" elevate-on-scroll flat app>
+  <v-app-bar class="app_header drag-area" flat>
     <div class="d-flex align-center">
-      <b-f-btn />
-      <reload-btn />
+      <!-- <b-f-btn /> -->
     </div>
     <div class="topbar-content-wrapper d-flex mx-2 no-drag-area">
       <search-input />
     </div>
     <div class="append d-flex no-drag-area">
-      <theme-toggle />
-      <Account />
+      <reload-btn />
+      <control-center-toggle />
       <window-control v-if="isShowWindowControl" />
     </div>
   </v-app-bar>
@@ -23,6 +22,7 @@ const isShowWindowControl = computed(() => {
 </script>
 <style scoped lang="scss">
 .app_header {
+  background: transparent;
   :deep(.v-toolbar__content) {
     justify-content: space-between;
     .topbar-content-wrapper {

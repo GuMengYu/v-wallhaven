@@ -131,7 +131,9 @@
     "shortcut": "快捷操作",
     "queue": "队列",
     "current_play": "正在播放",
-    "next_from": "下一首歌"
+    "next_from": "下一首歌",
+    "list": "列表看图",
+    "source": "图源"
   },
   "theme": {
     "RedSandDunes": "红沙滩",

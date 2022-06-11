@@ -1,5 +1,5 @@
 <template>
-  <v-btn icon @click="showControlCenter = !showControlCenter">
+  <v-btn icon @click="showControlCenter = !showControlCenter" color="primary">
     <v-icon size="small">{{ mdiEggFried }} </v-icon>
   </v-btn>
 </template>

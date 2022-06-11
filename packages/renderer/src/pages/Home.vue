@@ -1,6 +1,7 @@
 <template>
   <v-app class="v-player">
-    <app-nav class="v-player-nav" />
+    <AppCC />
+    <!-- <app-nav class="v-player-nav" /> -->
     <app-header class="v-player-header" />
     <app-content class="v-player-content" />
   </v-app>
@@ -13,6 +14,8 @@ import { useCurrentTheme } from '@/hooks/useTheme'
 
 import AppHeader from './layout/Header.vue'
 import AppNav from './layout/Navbar.vue'
+import AppCC from './layout/CC.vue'
+
 import AppContent from './layout/View.vue'
 const { themeName } = useCurrentTheme()
 const theme = useTheme()
