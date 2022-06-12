@@ -54,45 +54,17 @@ export const createElectronMenu = (window: BrowserWindow) => {
       label: '控制',
       submenu: [
         {
-          label: '播放|暂停',
-          accelerator: 'Space',
-          click: () => {
-            window.webContents.send('playOrPause')
-          },
-        },
-        {
-          label: '下一首',
+          label: '下一张',
           accelerator: 'CmdOrCtrl+Right',
           click: () => {
             window.webContents.send('next')
           },
         },
         {
-          label: '上一首',
+          label: '上一张',
           accelerator: 'CmdOrCtrl+Left',
           click: () => {
             window.webContents.send('prev')
-          },
-        },
-        {
-          label: '升高音量',
-          accelerator: 'CmdOrCtrl+Up',
-          click: () => {
-            window.webContents.send('volumeUp')
-          },
-        },
-        {
-          label: '降低音量',
-          accelerator: 'CmdOrCtrl+Down',
-          click: () => {
-            window.webContents.send('volumeDown')
-          },
-        },
-        {
-          label: '喜欢|不喜欢',
-          accelerator: 'CmdOrCtrl+L',
-          click: () => {
-            window.webContents.send('like')
           },
         },
         {

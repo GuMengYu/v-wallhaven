@@ -24,6 +24,7 @@ declare module '@vue/runtime-core' {
     SwitchCard: typeof import('./components/SwitchCard.vue')['default']
     ThemeToggle: typeof import('./components/toggle/ThemeToggle.vue')['default']
     Title: typeof import('./components/Title.vue')['default']
+    WallpaperThumb: typeof import('./components/WallpaperThumb.vue')['default']
     WindowControl: typeof import('./components/layout/WindowControl.vue')['default']
   }
 }

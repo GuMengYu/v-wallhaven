@@ -2,7 +2,7 @@
  * @see https://www.electron.build/configuration/configuration
  */
 {
-  "appId": "com.vplayer.app",
+  "appId": "com.vwallpaper.app",
   "copyright": 'Copyright © gumengyu 2022', //版权信息
   "asar": true,
   "directories": {

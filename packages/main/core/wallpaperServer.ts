@@ -8,7 +8,7 @@ export function useWallpaperServer() {
   Object.entries(apis).map(([k, v]) => {
     app.use(k, v)
   })
-  return app.listen(12141, '', () => {
-    log.info('app run in port 12141')
+  return app.listen(12151, '', () => {
+    log.info('app run in port 12151')
   })
 }

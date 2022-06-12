@@ -12,12 +12,12 @@ export function useStaticServer() {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'http://localhost:12141',
+      target: 'http://localhost:12151',
       changeOrigin: true,
       pathRewrite: (path) => path.replace(/^\/api/, ''),
     }) as express.RequestHandler
   )
-  return app.listen(12140, '', () => {
-    log.info('app run in port 12140')
+  return app.listen(12150, '', () => {
+    log.info('app run in port 12150')
   })
 }

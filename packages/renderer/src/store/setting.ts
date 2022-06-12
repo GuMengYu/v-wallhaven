@@ -35,7 +35,7 @@ export interface SettingState {
 export const useSettingStore = defineStore('setting', {
   state: () => {
     return useLocalStorage<SettingState>('setting', {
-      locale: 'en',
+      locale: 'zhCN',
       appearance: APPEARANCE.SYSTEM,
       wallpaperColor: 'GreenRockyMountains',
       customPalette: {

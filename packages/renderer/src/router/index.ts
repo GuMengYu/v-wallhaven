@@ -6,12 +6,12 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import Discover from '@/pages/discover/Discover.vue'
 import FourOhFour from '@/pages/errors/FourOhFour.vue'
 import Home from '@/pages/Home.vue'
-import Search from '@/pages/search/index.vue'
+import List from '@/pages/List.vue'
 import Setting from '@/pages/setting/Setting.vue'
 const musicRoutes: RouteRecordRaw[] = [
   {
-    path: 'discover/',
-    name: 'discover',
+    path: '/gallery',
+    name: 'gallery',
     component: Discover,
     meta: { keepAlive: true },
   },
@@ -24,9 +24,9 @@ const musicRoutes: RouteRecordRaw[] = [
     },
   },
   {
-    path: '/search/:keywords?',
-    name: 'search',
-    component: Search,
+    path: '/list',
+    name: 'list',
+    component: List,
     props: true,
     meta: {
       keepAlive: true,

@@ -93,6 +93,21 @@
   will-change: transform;
 }
 
+.slide-up-enter-active {
+  position: absolute;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.slide-up-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-up-enter-from,
+.slide-up-leave-to {
+  transform: translateY(20px);
+  opacity: 0;
+}
+
 .slide-down-enter-active {
   position: absolute;
   transition: opacity 0.2s ease, transform 0.5s ease;

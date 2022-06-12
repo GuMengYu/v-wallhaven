@@ -2,7 +2,7 @@
   <v-menu>
     <template #activator="{ props }">
       <slot name="activator" v-bind="{ props }">
-        <v-btn variant="text" v-bind="props" class="text-lowercase font-weight-bold">
+        <v-btn variant="text" v-bind="props" class="text-lowercase text-caption">
           {{ text }}
           <v-icon right class="ml-0" size="14">{{ mdiChevronDown }}</v-icon>
         </v-btn>

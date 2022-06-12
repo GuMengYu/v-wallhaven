@@ -12,10 +12,8 @@ import { useTheme } from 'vuetify'
 
 import { useCurrentTheme } from '@/hooks/useTheme'
 
-import AppHeader from './layout/Header.vue'
-import AppNav from './layout/Navbar.vue'
 import AppCC from './layout/CC.vue'
-
+import AppHeader from './layout/Header.vue'
 import AppContent from './layout/View.vue'
 const { themeName } = useCurrentTheme()
 const theme = useTheme()

@@ -80,10 +80,11 @@ function handleAppEvent() {
     }
     useWallpaperServer()
     wm = new WindowManager()
+    console.log(wm)
     const window = await wm.openWindow()
     if (window) {
       createElectronMenu(window)
-      is.windows() && createTray(window)
+      // is.windows() && createTray(window)
       registerIpcMain(window)
     }
   })

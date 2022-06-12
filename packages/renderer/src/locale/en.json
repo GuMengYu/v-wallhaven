@@ -133,7 +133,13 @@
     "current_play": "Current Playing",
     "next_from": "Next Track",
     "list": "list mode",
-    "source": "picture source"
+    "source": "picture source",
+    "top_range": "top list",
+    "order": "order",
+    "sorting": "sorting",
+    "cats": "cat",
+    "purity": "purity",
+    "gallery": "gallery"
   },
   "theme": {
     "RedSandDunes": "Red Sand Dunes",
