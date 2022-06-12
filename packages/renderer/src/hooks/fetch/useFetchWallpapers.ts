@@ -3,8 +3,8 @@ import type { Ref } from 'vue'
 
 import type { WALLHAVEN_MODEL } from '@/api/wallhaven'
 import { search } from '@/api/wallhaven'
+import { useSettingStore } from '@/store/setting'
 import { CATGORY, PURITY, SORTING, useWallpaperStore } from '@/store/wallpaper'
-
 export function useFetchWallpapers(page: Ref<number>) {
   const wallpapers = ref<WALLHAVEN_MODEL[]>([])
   const meta = ref<{
@@ -15,6 +15,7 @@ export function useFetchWallpapers(page: Ref<number>) {
   }>()
   const loading = ref(false)
   const wallpaperStore = useWallpaperStore()
+  const settingStore = useSettingStore()
 
   const { categories, purity, sorting, order, topRange } = storeToRefs(wallpaperStore)
 
@@ -38,6 +39,9 @@ export function useFetchWallpapers(page: Ref<number>) {
     }
     if (sorting.value === SORTING.TOPLIST) {
       params.topRange = topRange.value
+    }
+    if (settingStore.apiKey) {
+      params.apikey = settingStore.apiKey
     }
     loading.value = true
     try {

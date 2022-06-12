@@ -133,13 +133,14 @@
     "current_play": "正在播放",
     "next_from": "下一首歌",
     "list": "列表看图",
-    "source": "图源",
+    "source": "图源配置项",
     "top_range": "排行",
     "order": "升降序",
     "sorting": "排序",
     "cats": "类别",
     "purity": "限制性",
-    "gallery": "图册"
+    "gallery": "图册",
+    "wallhaven": "wallhaven"
   },
   "theme": {
     "RedSandDunes": "红沙滩",

@@ -139,7 +139,9 @@
     "sorting": "sorting",
     "cats": "cat",
     "purity": "purity",
-    "gallery": "gallery"
+    "gallery": "gallery",
+    "wallhaven": "wallhaven"
+
   },
   "theme": {
     "RedSandDunes": "Red Sand Dunes",

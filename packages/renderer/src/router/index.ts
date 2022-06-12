@@ -44,7 +44,7 @@ export function useRouter(app: App) {
         name: 'Home',
         component: Home,
         children: musicRoutes,
-        redirect: { path: '/discover' },
+        redirect: { path: '/gallery' },
       },
       {
         path: '/:pathMatch(.*)*',

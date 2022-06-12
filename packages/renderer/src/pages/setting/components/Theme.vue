@@ -2,7 +2,7 @@
   <app-settings-group v-model="appearance" title="common.theme" :items="appearanceItems" />
   <v-divider class="my-3 mx-n3" />
   <app-settings-group v-model="color" title="common.theme_color" :items="colorItems" />
-  <v-btn
+  <!-- <v-btn
     fixed
     bottom
     right
@@ -23,7 +23,7 @@
       {{ mdiPalette }}
     </v-icon>
   </v-btn>
-  <input v-show="false" ref="upload" type="file" accept="image/png,image/jpeg" @change="handleChange" />
+  <input v-show="false" ref="upload" type="file" accept="image/png,image/jpeg" @change="handleChange" /> -->
 </template>
 
 <script lang="ts">

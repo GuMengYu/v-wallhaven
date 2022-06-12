@@ -89,9 +89,8 @@ import { throttle } from 'lodash-es'
 import { useContextMenu } from 'vuetify-ctx-menu/lib/main'
 
 import type { WALLHAVEN_MODEL } from '@/api/wallhaven'
-import { search } from '@/api/wallhaven'
+import { useFetchWallpapers } from '@/hooks/fetch/useFetchWallpapers'
 import { useCurrentTheme } from '@/hooks/useTheme'
-import { sleep } from '@/util/fn'
 const contextMenu = useContextMenu()
 
 const { themeName } = useCurrentTheme()
@@ -106,7 +105,6 @@ const snackbar = ref(false)
 const cover = ref(false)
 const container = ref()
 const msg = ref('')
-const show = ref(true)
 const showInfo = ref(true)
 const currentImage = ref('')
 const prevWallpaper = throttle(loadPrev, 1500, { leading: true, trailing: false })
@@ -131,14 +129,6 @@ const wheelHandler = ({ movement: [x, y] }) => {
 useWheel(wheelHandler, {
   domTarget: container,
 })
-// useDrag(
-//   ({ swipe, tap }) => {
-//     console.log(swipe, tap)
-//   },
-//   {
-//     domTarget: demo,
-//   }
-// )
 
 function onContextMenu(e: MouseEvent) {
   const { x, y } = e
@@ -180,26 +170,19 @@ function onContextMenu(e: MouseEvent) {
   }
   contextMenu(option)
 }
-const fetchList = async () => {
-  loading.value = true
-  try {
-    const { data } = await search({
-      categories: '010',
-      purity: 110,
-      sorting: 'toplist',
-      order: 'desc',
-      page: page.value,
-    })
-    queue.value.push(...data.data)
-  } catch (e) {
-    console.log(e)
-  } finally {
+
+const { wallpapers, meta } = useFetchWallpapers(page)
+
+watch(wallpapers, (list) => {
+  if (list?.length) {
+    const offset = queue.value.length
+    // todo overflow
+    queue.value.push(...list)
+
     loading.value = true
+    currentIndex.value = offset
+    currentWallpaper.value = queue.value[currentIndex.value]
   }
-}
-onMounted(async () => {
-  await fetchList()
-  loadNext()
 })
 
 async function loadPrev() {
@@ -214,7 +197,7 @@ async function loadPrev() {
 async function loadNext() {
   if (currentIndex.value === queue.value.length - 1) {
     page.value++
-    await fetchList()
+    return
   }
   loading.value = true
   // currentWallpaper.value = null
@@ -254,9 +237,6 @@ function loadImage(url: string): Promise<HTMLImageElement> {
     }
     img.src = url
   })
-}
-function hide() {
-  show.value = !show.value
 }
 </script>
 

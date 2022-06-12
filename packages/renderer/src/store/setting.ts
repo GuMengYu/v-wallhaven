@@ -31,6 +31,7 @@ export interface SettingState {
   rail: boolean
   source: SOURCE
   cacheLimit: number
+  apiKey: string
 }
 export const useSettingStore = defineStore('setting', {
   state: () => {
@@ -44,6 +45,7 @@ export const useSettingStore = defineStore('setting', {
       },
       rail: false,
       source: SOURCE.WALLHAVEN,
+      apiKey: '',
       cacheLimit: 500,
     })
   },

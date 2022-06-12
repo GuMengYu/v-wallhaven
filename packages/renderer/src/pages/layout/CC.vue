@@ -211,21 +211,26 @@ const categoriesOptions = [
     activeClass: 'text-primary',
   },
 ]
-const purityOptions = [
-  {
-    title: 'SFW',
-    value: PURITY.SFW,
-    activeClass: 'text-primary',
-  },
-  {
-    title: 'SKETCHY',
-    value: PURITY.SKETCHY,
-    activeClass: 'text-primary',
-  },
-  {
-    title: 'NSFW',
-    value: PURITY.NSFW,
-    activeClass: 'text-primary',
-  },
-]
+const purityOptions = computed(() => {
+  const options = [
+    {
+      title: 'SFW',
+      value: PURITY.SFW,
+      activeClass: 'text-primary',
+    },
+    {
+      title: 'SKETCHY',
+      value: PURITY.SKETCHY,
+      activeClass: 'text-primary',
+    },
+  ]
+  if (setting.apiKey) {
+    options.push({
+      title: 'NSFW',
+      value: PURITY.NSFW,
+      activeClass: 'text-primary',
+    })
+  }
+  return options
+})
 </script>
