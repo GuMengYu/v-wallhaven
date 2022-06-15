@@ -204,3 +204,25 @@ export const formatNumber = (number: number) => {
     return number
   }
 }
+
+export async function loadImages(urls: string[]) {
+  const images = urls.map((url) => {
+    return loadImage(url)
+  })
+  const res = await Promise.allSettled(images)
+  return res
+}
+
+export function loadImage(url: string): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
+    const img = new Image()
+    img.className = 'img-fluid'
+    img.onload = () => {
+      resolve(img)
+    }
+    img.onerror = () => {
+      reject(img)
+    }
+    img.src = url
+  })
+}

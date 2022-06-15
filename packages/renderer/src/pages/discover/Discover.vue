@@ -91,11 +91,15 @@ import { useContextMenu } from 'vuetify-ctx-menu/lib/main'
 import type { WALLHAVEN_MODEL } from '@/api/wallhaven'
 import { useFetchWallpapers } from '@/hooks/fetch/useFetchWallpapers'
 import { useCurrentTheme } from '@/hooks/useTheme'
+import { loadImage, loadImages } from '@/util/fn'
+
 const contextMenu = useContextMenu()
 
 const { themeName } = useCurrentTheme()
 
 const queue = ref<WALLHAVEN_MODEL[]>([])
+const preloadCount = ref(5)
+
 const loading = ref(false)
 const currentIndex = ref(-1)
 const currentWallpaper = ref<WALLHAVEN_MODEL>()
@@ -106,18 +110,20 @@ const cover = ref(false)
 const container = ref()
 const msg = ref('')
 const showInfo = ref(true)
-const currentImage = ref('')
+
 const prevWallpaper = throttle(loadPrev, 1500, { leading: true, trailing: false })
 const nextWallpaper = throttle(loadNext, 1500, { leading: true, trailing: false })
 
 const prevWallpaperClick = throttle(loadPrev, 500, { leading: true, trailing: false })
 const nextWallpaperClick = throttle(loadNext, 500, { leading: true, trailing: false })
 
+// 按下空格
 onKeyStroke(' ', (e) => {
   cover.value = !cover.value
 })
 
-const wheelHandler = ({ movement: [x, y] }) => {
+// 监听滚轮横向滚动事件（或者触摸板横向滑动）
+const wheelHandler = ({ movement: [x, y] }: { movement: [number, number] }) => {
   if (x > 800) {
     nextWallpaper()
   } else if (x < -800) {
@@ -129,6 +135,84 @@ const wheelHandler = ({ movement: [x, y] }) => {
 useWheel(wheelHandler, {
   domTarget: container,
 })
+
+const { wallpapers, meta } = useFetchWallpapers(page)
+
+watch(wallpapers, async (list) => {
+  if (list?.length) {
+    const before = currentWallpaper.value?.id
+    queue.value = list
+
+    const first = queue.value[0]
+    if (first?.id === before) {
+      await nextTick()
+      loading.value = false
+    } else {
+      loading.value = true
+      currentIndex.value = 0
+      preloadCount.value = 0
+      currentWallpaper.value = first
+    }
+  }
+})
+watch(preloadCount, (newVal) => {
+  console.log('watchEffect---preloadCount', newVal, 'currentIndex', currentIndex.value)
+  if (newVal <= 0) {
+    const start = currentIndex.value + 1
+    const end = currentIndex.value + 6
+    const picked = queue.value.slice(start, end) // 取后5张
+    if (picked.length) {
+      console.log(
+        "preload images's id",
+        picked.map((item) => item.id)
+      )
+      preload(picked)
+    }
+    preloadCount.value = 5
+  }
+})
+
+function preload(list: WALLHAVEN_MODEL[]) {
+  list.map((i) => {
+    return loadImage(i.path)
+  })
+}
+
+async function loadPrev() {
+  if (currentIndex.value === 0) {
+    return
+  }
+  loading.value = true
+  await nextTick()
+  currentWallpaper.value = void 0
+  currentIndex.value--
+  preloadCount.value++
+  currentWallpaper.value = queue.value[currentIndex.value]
+}
+async function loadNext() {
+  if (currentIndex.value === queue.value.length - 1) {
+    page.value++
+    return
+  }
+  loading.value = true
+  await nextTick()
+  // currentWallpaper.value = null
+
+  currentIndex.value++
+  preloadCount.value--
+  currentWallpaper.value = queue.value[currentIndex.value]
+}
+
+async function detail() {
+  showInfo.value = !showInfo.value
+}
+async function onLoad() {
+  await nextTick()
+  loading.value = false
+}
+function onError() {
+  loading.value = false
+}
 
 function onContextMenu(e: MouseEvent) {
   const { x, y } = e
@@ -169,74 +253,6 @@ function onContextMenu(e: MouseEvent) {
     ],
   }
   contextMenu(option)
-}
-
-const { wallpapers, meta } = useFetchWallpapers(page)
-
-watch(wallpapers, (list) => {
-  if (list?.length) {
-    const offset = queue.value.length
-    // todo overflow
-    queue.value.push(...list)
-
-    loading.value = true
-    currentIndex.value = offset
-    currentWallpaper.value = queue.value[currentIndex.value]
-  }
-})
-
-async function loadPrev() {
-  if (currentIndex.value === 0) {
-    return
-  }
-  loading.value = true
-  currentWallpaper.value = void 0
-  currentIndex.value--
-  currentWallpaper.value = queue.value[currentIndex.value]
-}
-async function loadNext() {
-  if (currentIndex.value === queue.value.length - 1) {
-    page.value++
-    return
-  }
-  loading.value = true
-  // currentWallpaper.value = null
-
-  currentIndex.value++
-  currentWallpaper.value = queue.value[currentIndex.value]
-  console.log(currentWallpaper.value)
-}
-
-async function detail() {
-  showInfo.value = !showInfo.value
-}
-async function onLoad() {
-  await nextTick()
-  loading.value = false
-}
-function onError() {
-  loading.value = false
-}
-
-function loadImage(url: string): Promise<HTMLImageElement> {
-  const img = h('img', {
-    class: ['v-img__img'],
-    src: url,
-    ref: currentImage,
-    onLoad,
-    onError,
-  })
-  return new Promise((resolve, reject) => {
-    const img = new Image()
-    img.className = 'img-fluid'
-    img.onload = () => {
-      resolve(img)
-    }
-    img.onerror = () => {
-      reject(img)
-    }
-    img.src = url
-  })
 }
 </script>
 
