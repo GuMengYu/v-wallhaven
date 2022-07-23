@@ -1,10 +1,10 @@
 <template>
-  <v-btn icon class="no-drag-area" @click.prevent="back">
+  <v-btn icon @click.prevent="back">
     <v-icon>
       {{ mdiChevronLeft }}
     </v-icon>
   </v-btn>
-  <v-btn icon class="no-drag-area" @click.prevent="forward">
+  <v-btn icon @click.prevent="forward">
     <v-icon>
       {{ mdiChevronRight }}
     </v-icon>

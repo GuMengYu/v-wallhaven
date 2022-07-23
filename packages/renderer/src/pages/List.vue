@@ -4,33 +4,46 @@ import { mdiClose } from '@mdi/js'
 import type { WALLHAVEN_MODEL } from '@/api/wallhaven'
 import { useFetchWallpapers } from '@/hooks/fetch/useFetchWallpapers'
 const page = ref(1)
+const el = ref<HTMLElement | null>(null)
+const wallpapers = ref<WALLHAVEN_MODEL[]>([])
 const modelState = reactive({
   visiable: false,
   data: {} as WALLHAVEN_MODEL,
 })
-const { wallpapers, meta, loading } = useFetchWallpapers(page)
+const { wallpapers: newData, meta, loading, error } = useFetchWallpapers(page)
+
 function open(wallpaper: WALLHAVEN_MODEL) {
   modelState.visiable = true
   modelState.data = wallpaper
 }
+
+useInfiniteScroll(
+  el,
+  () => {
+    // load more
+    console.log('load more')
+    page.value++
+  },
+  { distance: 40 }
+)
+watchEffect(() => {
+  wallpapers.value.push(...newData.value)
+})
 </script>
 <template>
-  <section class="mt-16 mx-4">
-    <h1 class="text-h3">wallhaven</h1>
-    <v-progress-linear v-show="loading" indeterminate color="primary" rounded height="2"></v-progress-linear>
-    <transition name="slide-fade-y">
-      <div v-show="!loading">
-        <card-row>
-          <wallpaper-thumb
-            v-for="wallpaper in wallpapers"
-            :key="wallpaper.id"
-            :wallpaper="wallpaper"
-            @open="open(wallpaper)"
-          >
-          </wallpaper-thumb>
-        </card-row>
-      </div>
-    </transition>
+  <section>
+    <div ref="el" class="overflow-y-auto h-screen pa-4">
+      <card-row>
+        <wallpaper-thumb
+          v-for="wallpaper in wallpapers"
+          :key="wallpaper.id"
+          :wallpaper="wallpaper"
+          @open="open(wallpaper)"
+        >
+        </wallpaper-thumb>
+      </card-row>
+      <v-progress-linear v-show="loading" indeterminate color="primary" rounded height="1"></v-progress-linear>
+    </div>
     <v-dialog v-model="modelState.visiable" fullscreen>
       <v-card>
         <v-img :src="modelState.data.path">

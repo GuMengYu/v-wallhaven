@@ -1,11 +1,11 @@
+import type { MaybeRef } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
-import type { Ref } from 'vue'
 
 import type { WALLHAVEN_MODEL } from '@/api/wallhaven'
 import { search } from '@/api/wallhaven'
 import { useSettingStore } from '@/store/setting'
 import { CATGORY, PURITY, SORTING, useWallpaperStore } from '@/store/wallpaper'
-export function useFetchWallpapers(page: Ref<number>) {
+export function useFetchWallpapers(page: MaybeRef<number>) {
   const wallpapers = ref<WALLHAVEN_MODEL[]>([])
   const meta = ref<{
     current_page: number
@@ -14,6 +14,7 @@ export function useFetchWallpapers(page: Ref<number>) {
     total: number
   }>()
   const loading = ref(false)
+  const error = ref<unknown>()
   const wallpaperStore = useWallpaperStore()
   const settingStore = useSettingStore()
 
@@ -29,13 +30,13 @@ export function useFetchWallpapers(page: Ref<number>) {
       purity.value.includes(PURITY.NSFW) ? 1 : 0
     }`
   })
-  watchEffect(async () => {
+  const doFetch = async () => {
     const params: Record<string, any> = {
       categories: cats.value,
       purity: puritys.value,
       sorting: sorting.value,
       order: order.value,
-      page: page.value,
+      page: unref(page),
     }
     if (sorting.value === SORTING.TOPLIST) {
       params.topRange = topRange.value
@@ -50,13 +51,20 @@ export function useFetchWallpapers(page: Ref<number>) {
       meta.value = data.meta
     } catch (e) {
       console.error(e)
+      error.value = e
     } finally {
       loading.value = false
     }
-  })
+  }
+  if (isRef(page)) {
+    watchEffect(doFetch)
+  } else {
+    doFetch()
+  }
   return {
     wallpapers,
     meta: meta,
     loading,
+    error,
   }
 }

@@ -8,7 +8,7 @@
     floating
     class="bg-surface"
   >
-    <v-toolbar dense class="pr-2" color="surface">
+    <v-toolbar dense class="pr-4" color="surface">
       <v-toolbar-title class="text-onSurfaceVariant">{{ $t('common.setting') }}</v-toolbar-title>
       <v-spacer />
       <v-btn icon size="small" @click="app.showControlCenter = false">
@@ -27,11 +27,13 @@
         </v-row>
         <v-row dense class="mt-1">
           <v-col class="d-flex">
-            <switch-card :title="$t('common.list')" :icon="mdiCog" @click="to('list')" />
+            <switch-card
+              :title="$t(`common.${inList ? 'gallery' : 'list'}`)"
+              :icon="mdiCog"
+              @click="to(inList ? 'gallery' : 'list')"
+            />
           </v-col>
-          <v-col>
-            <switch-card :title="$t('common.gallery')" :icon="mdiCog" @click="to('gallery')" />
-          </v-col>
+          <v-col></v-col>
         </v-row>
         <v-divider class="my-2" />
       </div>
@@ -82,6 +84,7 @@ import { mdiCircleHalfFull, mdiClose, mdiCog, mdiSort } from '@mdi/js'
 import { storeToRefs } from 'pinia'
 import { useTheme } from 'vuetify'
 
+import useInForeground from '@/hooks/useInForeground'
 import { useAppStore } from '@/store/app'
 import { APPEARANCE, useSettingStore } from '@/store/setting'
 import { CATGORY, ORDER, PURITY, SORTING, TOPRANGE, useWallpaperStore } from '@/store/wallpaper'
@@ -89,6 +92,7 @@ import { CATGORY, ORDER, PURITY, SORTING, TOPRANGE, useWallpaperStore } from '@/
 const wallpaperStore = useWallpaperStore()
 const { categories, purity, sorting, order, topRange } = storeToRefs(wallpaperStore)
 
+const { isActive: inList } = useInForeground('list')
 const app = useAppStore()
 const setting = useSettingStore()
 const theme = useTheme()

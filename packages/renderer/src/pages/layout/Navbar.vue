@@ -58,9 +58,9 @@ const state = reactive({
     },
     {
       icon: mdiHome,
-      val: 'discover',
-      title: 'main.nav.discover',
-      to: '/discover',
+      val: 'gallery',
+      title: 'main.nav.gallery',
+      to: '/gallery',
     },
     {
       icon: mdiAlbum,

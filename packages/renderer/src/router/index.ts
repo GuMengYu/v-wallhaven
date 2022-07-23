@@ -3,8 +3,8 @@ import type { App } from 'vue'
 import type { RouteRecordRaw } from 'vue-router'
 import { createRouter, createWebHashHistory } from 'vue-router'
 
-import Discover from '@/pages/discover/Discover.vue'
 import FourOhFour from '@/pages/errors/FourOhFour.vue'
+import Gallery from '@/pages/Gallery.vue'
 import Home from '@/pages/Home.vue'
 import List from '@/pages/List.vue'
 import Setting from '@/pages/setting/Setting.vue'
@@ -12,7 +12,7 @@ const musicRoutes: RouteRecordRaw[] = [
   {
     path: '/gallery',
     name: 'gallery',
-    component: Discover,
+    component: Gallery,
     meta: { keepAlive: true },
   },
   {

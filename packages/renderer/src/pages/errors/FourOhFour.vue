@@ -6,14 +6,8 @@
 
         <p>The page you were looking for does not exist</p>
 
-        <v-btn to="/discover" color="primary" outlined> Get me out of here! </v-btn>
+        <v-btn to="/gallery" color="primary" outlined> Get me out of here! </v-btn>
       </v-col>
     </v-row>
   </v-container>
 </template>
-
-<script>
-export default {
-  name: 'FourOhFour',
-}
-</script>

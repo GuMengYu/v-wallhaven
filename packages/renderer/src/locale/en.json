@@ -9,7 +9,7 @@
   "main": {
     "nav": {
       "search": "Search",
-      "discover": "Home",
+      "gallery": "Home",
       "explore": "Explore",
       "fm": "Private FM",
       "daily": "Daily Recommend",
@@ -42,7 +42,7 @@
       "desc": "Description",
       "to163": "jump to 163 music"
     },
-    "discover": {
+    "gallery": {
       "common": "common",
       "featured": "Featured",
       "new_releases_album": "New Release",
