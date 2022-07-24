@@ -1,10 +1,14 @@
 import type { MaybeRef } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
+import { useToast } from 'vue-toastification'
 
 import type { WALLHAVEN_MODEL } from '@/api/wallhaven'
 import { search } from '@/api/wallhaven'
 import { useSettingStore } from '@/store/setting'
 import { CATGORY, PURITY, SORTING, useWallpaperStore } from '@/store/wallpaper'
+
+const toast = useToast()
+
 export function useFetchWallpapers(page: MaybeRef<number>) {
   const wallpapers = ref<WALLHAVEN_MODEL[]>([])
   const meta = ref<{
@@ -12,10 +16,16 @@ export function useFetchWallpapers(page: MaybeRef<number>) {
     last_page: number
     per_page: number
     total: number
-  }>()
+  }>({
+    current_page: 1,
+    last_page: 1,
+    per_page: 1,
+    total: 1,
+  })
   const loading = ref(false)
   const error = ref<unknown>()
   const wallpaperStore = useWallpaperStore()
+  const reset = ref(false)
   const settingStore = useSettingStore()
 
   const { categories, purity, sorting, order, topRange } = storeToRefs(wallpaperStore)
@@ -51,19 +61,57 @@ export function useFetchWallpapers(page: MaybeRef<number>) {
       meta.value = data.meta
     } catch (e) {
       console.error(e)
+      toast.error('something error')
       error.value = e
     } finally {
       loading.value = false
     }
   }
+  // 重置请求
+  const resetFetch = () => {
+    if (isRef(page)) {
+      if (page.value > 1) {
+        reset.value = true
+        page.value = 1
+      } else {
+        doFetch()
+      }
+    } else {
+      page = 1
+      doFetch()
+    }
+  }
+  watch(cats, () => {
+    resetFetch()
+  })
+  watch(puritys, () => {
+    resetFetch()
+  })
+  watch(sorting, () => {
+    resetFetch()
+  })
+  watch(order, () => {
+    resetFetch()
+  })
   if (isRef(page)) {
-    watchEffect(doFetch)
+    doFetch()
+    watch(page, () => {
+      reset.value = false
+      doFetch()
+    })
   } else {
     doFetch()
   }
+
+  // if (isRef(page)) {
+  //   watchEffect(doFetch)
+  // } else {
+  //   doFetch()
+  // }
   return {
     wallpapers,
     meta: meta,
+    reset,
     loading,
     error,
   }

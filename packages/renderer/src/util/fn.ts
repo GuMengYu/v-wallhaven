@@ -226,3 +226,29 @@ export function loadImage(url: string): Promise<HTMLImageElement> {
     img.src = url
   })
 }
+
+export function setTransForm(
+  el: HTMLElement,
+  t: {
+    x: string
+    y: string
+    scale: string
+    rotate: string
+  }
+) {
+  const n = t.x
+  const r = t.y
+  const i = t.scale
+  const o = t.rotate
+  let transform = el.style.transform
+  transform = transform
+    .replace(/scale\(.[^)]*\)/, '')
+    .replace(/translate\(.[^)]*\)/, '')
+    .replace(/rotate\(.[^)]*\)/, '')
+  el.style.transform = ''
+    .concat(transform, ' translate(')
+    .concat(n, 'px, ')
+    .concat(r, 'px) scale(')
+    .concat(i, ') rotate(')
+    .concat(o, 'deg)')
+}
