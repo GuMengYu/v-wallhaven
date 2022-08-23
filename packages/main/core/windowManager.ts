@@ -57,17 +57,17 @@ export default class WindowManager extends EventEmitter {
       log.info('leave-full-screen')
       this.window?.webContents.send('fullscreen', false)
     })
-    this.window?.on('close', (event) => {
-      if (!this.willQuit) {
-        event.preventDefault()
-        if (this.window?.isFullScreen()) {
-          this.window?.once('leave-full-screen', () => this.window?.hide())
-          this.window?.setFullScreen(false)
-        } else {
-          this.window?.hide()
-        }
-      }
-    })
+    // this.window?.on('close', (event) => {
+    //   if (!this.willQuit) {
+    //     event.preventDefault()
+    //     if (this.window?.isFullScreen()) {
+    //       this.window?.once('leave-full-screen', () => this.window?.hide())
+    //       this.window?.setFullScreen(false)
+    //     } else {
+    //       this.window?.hide()
+    //     }
+    //   }
+    // })
     this.window?.on('maximize', () => {
       log.info('window maximize')
       this.window?.webContents.send('windowState', WindowState.MAXIMIZED)

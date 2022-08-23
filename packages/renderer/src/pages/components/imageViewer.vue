@@ -1,12 +1,10 @@
 <script lang="ts" setup>
-import { mdiChevronLeft, mdiInformation } from '@mdi/js'
-import type { State } from '@vueuse/gesture'
-import { useDrag, useWheel } from '@vueuse/gesture'
+import { mdiClose, mdiInformationOutline } from '@mdi/js'
 import type { ComponentPublicInstance } from 'vue'
 import { useToast } from 'vue-toastification'
 
 import type { WALLHAVEN_MODEL } from '@/api/wallhaven'
-import { setTransForm, sleep } from '@/util/fn'
+import { setTransForm } from '@/util/fn'
 const toast = useToast()
 // props
 const props = defineProps<{
@@ -58,7 +56,11 @@ const wheelHandler = (event: WheelEvent) => {
   let n = 1
   if (event.deltaY) {
     n = event.deltaY > 0 ? 1 : -1
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
   } else if (event.wheelDelta) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     n = -event.wheelDelta / 120
   } else if (event.detail) {
     n = event.detail > 0 ? 1 : -1
@@ -143,7 +145,7 @@ function close() {
         }"
       >
         <v-btn icon @click="close">
-          <v-icon>{{ mdiChevronLeft }}</v-icon>
+          <v-icon>{{ mdiClose }}</v-icon>
         </v-btn>
 
         <v-toolbar-title>{{ `${data.category} #${data.id}` }}</v-toolbar-title>
@@ -151,7 +153,7 @@ function close() {
         <v-spacer></v-spacer>
 
         <v-btn icon @click="showDetail = !showDetail">
-          <v-icon>{{ mdiInformation }}</v-icon>
+          <v-icon>{{ mdiInformationOutline }}</v-icon>
         </v-btn>
       </v-toolbar>
       <v-progress-linear

@@ -59,14 +59,14 @@
         color="surfaceVariant"
       >
         <v-card-title>
-          <span class="text-uppercase mr-1">{{ currentWallpaper?.category }}</span>
-          <a href="javascript:void 0" @click="to"> #{{ currentWallpaper?.id }} </a>
+          <span class="text-uppercase">{{ currentWallpaper?.category }}</span>
+          <a href="javascript:void 0" class="text-decoration-none" @click="to"> #{{ currentWallpaper?.id }} </a>
         </v-card-title>
         <div class="divider mx-3" style="min-height: 4px">
           <v-progress-linear v-show="loading" indeterminate color="primary" rounded></v-progress-linear>
         </div>
 
-        <v-card-text class="text-caption d-flex flex-column pt-0">
+        <v-card-text class="text-caption d-flex flex-column pt-1">
           <span> {{ currentWallpaper?.views }} views </span>
           <span>
             {{ currentWallpaper?.created_at }}

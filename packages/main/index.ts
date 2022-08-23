@@ -94,6 +94,10 @@ function handleAppEvent() {
   app.on('before-quit', () => {
     wm.willQuit = true
   })
+  // 所有窗口关闭后退出应用
+  app.on('window-all-closed', () => {
+    app.quit()
+  })
 }
 
 function preCheck() {

@@ -45,9 +45,9 @@ export const useWallpaperStore = defineStore('wallpaper', {
     return useLocalStorage<WallpaperState>('wallpaper', {
       categories: [CATGORY.GENERAL, CATGORY.ANIME, CATGORY.PEOPLE],
       purity: [PURITY.SFW, PURITY.SKETCHY],
-      sorting: SORTING.RELEVANCE,
+      sorting: SORTING.TOPLIST,
       order: ORDER.DESC,
-      topRange: TOPRANGE.LAST_MONTH,
+      topRange: TOPRANGE.LAST_WEEK,
     })
   },
 })
