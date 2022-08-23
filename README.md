@@ -7,12 +7,9 @@
 
 ## Introduction
 
+一个 wallhaven 网站的看图客户端软件，滑动直接浏览大图
 
-🎨 已有功能
-
-
-🏗 Work In Progress
-
+![](./doc/gallary.png)
 
 ## 运行
 
@@ -38,12 +35,18 @@ npm run electron:build
 
 ## 预览
 
+![](./doc/option.png)
+
+---
+
+![](./doc/list.png)
 
 ## License [MIT](/LICENSE)
+
 ```
 MIT License
 
-Copyright (c) 2021 hyu
+Copyright (c) 2022 hyu
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
