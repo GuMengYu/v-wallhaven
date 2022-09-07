@@ -226,6 +226,7 @@ function onContextMenu(e: MouseEvent) {
   const { x, y } = e
   const option = {
     theme: themeName.value,
+    customClass: 'bg-surfaceVariant',
     x,
     y,
     items: [

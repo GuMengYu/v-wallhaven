@@ -2,20 +2,20 @@
   <app-title path="common.other" class="mb-2 pl-1" />
 
   <v-list-item>
-    <v-list-item-header>
+    <v-list-item-title>
       <v-list-item-title>{{ $t('common.language') }}</v-list-item-title>
-    </v-list-item-header>
-    <v-list-item-media>
+    </v-list-item-title>
+    <template #append>
       <App-Select v-model="lang" :items="localeOptions" />
-    </v-list-item-media>
+    </template>
   </v-list-item>
   <v-list-item>
-    <v-list-item-header>
+    <v-list-item-title>
       <v-list-item-title>{{ $t('common.source') }}</v-list-item-title>
-    </v-list-item-header>
-    <v-list-item-media>
+    </v-list-item-title>
+    <template #append>
       <App-Select v-model="source" :items="sourceOptions" />
-    </v-list-item-media>
+    </template>
   </v-list-item>
   <v-divider class="mt-4 mb-3 mx-n3" />
 </template>

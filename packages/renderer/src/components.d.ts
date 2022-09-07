@@ -3,6 +3,8 @@
 // Read more: https://github.com/vuejs/core/pull/3399
 import '@vue/runtime-core'
 
+export {}
+
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     BFBtn: typeof import('./components/button/BFBtn.vue')['default']
@@ -28,5 +30,3 @@ declare module '@vue/runtime-core' {
     WindowControl: typeof import('./components/layout/WindowControl.vue')['default']
   }
 }
-
-export {}

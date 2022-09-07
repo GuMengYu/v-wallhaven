@@ -8,8 +8,8 @@
     floating
     class="bg-surface"
   >
-    <v-toolbar dense class="pr-4" color="surface">
-      <v-toolbar-title class="text-onSurfaceVariant">{{ $t('common.setting') }}</v-toolbar-title>
+    <v-toolbar dense color="surface">
+      <v-toolbar-title class="text-onSurfaceVariant text-body-2">{{ $t('common.setting') }}</v-toolbar-title>
       <v-spacer />
       <v-btn icon size="small" @click="app.showControlCenter = false">
         <v-icon size="small"> {{ mdiClose }} </v-icon>
@@ -39,41 +39,45 @@
       </div>
 
       <v-list-item>
-        <v-list-item-header class="text-caption">
+        <v-list-item-title class="text-caption">
           {{ $t('common.sorting') }}
-        </v-list-item-header>
-        <v-list-item-media>
+        </v-list-item-title>
+        <template #append>
           <Select v-model="sorting" :items="sortingOptions" />
-        </v-list-item-media>
+        </template>
       </v-list-item>
       <v-list-item>
-        <v-list-item-header class="text-caption"> {{ $t('common.order') }} </v-list-item-header>
-        <v-list-item-media>
+        <v-list-item-title class="text-caption"> {{ $t('common.order') }} </v-list-item-title>
+        <template #append>
           <Select v-model="order" :items="orderOptions" />
-        </v-list-item-media>
+        </template>
       </v-list-item>
       <v-list-item v-if="sorting === SORTING.TOPLIST">
-        <v-list-item-header class="text-caption"> {{ $t('common.top_range') }} </v-list-item-header>
-        <v-list-item-media>
+        <v-list-item-title class="text-caption"> {{ $t('common.top_range') }} </v-list-item-title>
+        <template #append>
           <Select v-model="topRange" :items="topRangeOptions" />
-        </v-list-item-media>
+        </template>
       </v-list-item>
       <v-list-item>
-        <v-list-item-header class="text-caption"> {{ $t('common.cats') }} </v-list-item-header>
-        <v-chip-group v-model="categories" multiple variant="outlined" color="primary">
-          <v-chip v-for="cat in categoriesOptions" :key="cat.value" size="small" label :value="cat.value">
-            {{ cat.title }}
-          </v-chip>
-        </v-chip-group>
+        <v-list-item-title class="text-caption"> {{ $t('common.cats') }} </v-list-item-title>
+        <template #append>
+          <v-chip-group v-model="categories" multiple variant="outlined" color="primary" class="justify-end">
+            <v-chip v-for="cat in categoriesOptions" :key="cat.value" size="small" label :value="cat.value">
+              {{ cat.title }}
+            </v-chip>
+          </v-chip-group>
+        </template>
       </v-list-item>
 
       <v-list-item>
-        <v-list-item-header class="text-caption"> {{ $t('common.purity') }} </v-list-item-header>
-        <v-chip-group v-model="purity" multiple variant="outlined" color="primary">
-          <v-chip v-for="cat in purityOptions" :key="cat.value" size="small" label :value="cat.value">
-            {{ cat.title }}
-          </v-chip>
-        </v-chip-group>
+        <v-list-item-title class="text-caption"> {{ $t('common.purity') }} </v-list-item-title>
+        <template #append>
+          <v-chip-group v-model="purity" multiple variant="outlined" color="primary" class="justify-end">
+            <v-chip v-for="cat in purityOptions" :key="cat.value" size="small" label :value="cat.value">
+              {{ cat.title }}
+            </v-chip>
+          </v-chip-group>
+        </template>
       </v-list-item>
     </v-container>
   </v-navigation-drawer>

@@ -7,7 +7,7 @@
       <b-f-btn />
       <reload-btn />
       <!-- <theme-toggle /> -->
-      <control-center-toggle />
+      <control-center-toggle class="mr-2" />
     </div>
   </v-app-bar>
 </template>
