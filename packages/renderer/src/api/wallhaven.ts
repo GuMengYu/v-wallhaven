@@ -25,15 +25,12 @@ export interface WALLHAVEN_MODEL {
 }
 export function search(params: Record<string, any>) {
   return request<{
-    code: number
-    data: {
-      data: WALLHAVEN_MODEL[]
-      meta: {
-        current_page: number
-        last_page: number
-        per_page: number
-        total: number
-      }
+    data: WALLHAVEN_MODEL[]
+    meta: {
+      current_page: number
+      last_page: number
+      per_page: number
+      total: number
     }
-  }>('/wallhaven/search', { params })
+  }>('/search', { params })
 }

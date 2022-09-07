@@ -56,9 +56,9 @@ export function useFetchWallpapers(page: MaybeRef<number>) {
     }
     loading.value = true
     try {
-      const { data } = await search(params)
-      wallpapers.value = data.data
-      meta.value = data.meta
+      const { data, meta: _meta } = await search(params)
+      wallpapers.value = data
+      meta.value = _meta
     } catch (e) {
       console.error(e)
       toast.error('something error')

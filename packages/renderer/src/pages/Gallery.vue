@@ -14,9 +14,9 @@
     >
     </v-img>
 
-    <v-snackbar v-model="snackbar" location="top start" timeout="20000">
+    <v-snackbar v-model="snackbar" location="bottom end">
       <div class="text-subtitle-1 text-onSurface">
-        {{ msg }}
+        {{ setwallpaper }}
       </div>
       <template #actions>
         <v-btn color="primary" icon variant="plain" @click="snackbar = false">
@@ -85,13 +85,15 @@ import { mdiChevronLeft, mdiChevronRight, mdiInformationOutline } from '@mdi/js'
 import { useIpcRenderer } from '@vueuse/electron'
 import { useWheel } from '@vueuse/gesture'
 import { throttle } from 'lodash-es'
+import { storeToRefs } from 'pinia'
 import { useContextMenu } from 'vuetify-ctx-menu/lib/main'
 
 import type { WALLHAVEN_MODEL } from '@/api/wallhaven'
 import { useFetchWallpapers } from '@/hooks/fetch/useFetchWallpapers'
 import { useCurrentTheme } from '@/hooks/useTheme'
+import { SetWallpaper, useAppStore } from '@/store/app'
 import { bytesToSize, loadImage, sleep } from '@/util/fn'
-
+const { setwallpaper } = storeToRefs(useAppStore())
 const ipcRenderer = useIpcRenderer()
 const contextMenu = useContextMenu()
 
@@ -144,7 +146,7 @@ useWheel(wheelHandler, {
   domTarget: container,
 })
 
-const { wallpapers, meta } = useFetchWallpapers(page)
+const { wallpapers, meta, error } = useFetchWallpapers(page)
 
 watch(wallpapers, async (list) => {
   if (list?.length) {
@@ -177,6 +179,17 @@ watch(preloadCount, (newVal) => {
       preload(picked)
     }
     preloadCount.value = 5
+  }
+})
+
+watch(setwallpaper, (state) => {
+  console.log('setwallpaper state changed', state)
+  if (state) {
+    if (state === SetWallpaper.setting) {
+      loading.value = true
+    } else {
+      loading.value = false
+    }
   }
 })
 
@@ -237,29 +250,20 @@ function onContextMenu(e: MouseEvent) {
         },
       },
       {
-        label: '用作桌面背景',
+        label: '下载并设为桌面背景',
         onClick: () => {
+          ipcRenderer.invoke('setWallpaper', currentWallpaper.value?.path)
+          // wallpaper.set(currentWallpaper.value?.path)
           snackbar.value = true
-        },
-      },
-      {
-        // icon: mdiFaceMan,
-        label: '用作锁屏背景',
-        onClick: () => {
-          // todo
         },
       },
       {
         // icon: mdiFaceMan,
         label: '下载',
         onClick: () => {
-          // todo
-        },
-      },
-      {
-        // icon: mdiFaceMan,
-        label: '去wallhaven原链接',
-        onClick: () => {
+          ipcRenderer.invoke('downloadFile', {
+            url: currentWallpaper.value?.path,
+          })
           // todo
         },
       },

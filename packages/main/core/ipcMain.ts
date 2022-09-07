@@ -1,9 +1,10 @@
 import type { BrowserWindow } from 'electron'
-import { ipcMain, shell } from 'electron'
+import { app, ipcMain, shell } from 'electron'
 
 import { WindowState } from '../../renderer/src/util/enum'
 import { downloadFile } from './util/download'
 import log from './util/log'
+import { setWallpaper } from './util/wallpaper'
 export const registerIpcMain = (window: BrowserWindow) => {
   ipcMain.handle('zoom-window', () => {
     if (window.isMaximized()) {
@@ -49,5 +50,17 @@ export const registerIpcMain = (window: BrowserWindow) => {
       height,
     }
     return result
+  })
+  ipcMain.handle('setWallpaper', async (e, url: string) => {
+    try {
+      window.webContents.send('setWallpaper', 'loading')
+      const directory = app.getPath('pictures')
+      const file = await downloadFile({ url, directory })
+      console.log('will set wallpaper path:', file.path)
+      await setWallpaper(file.path)
+      window.webContents.send('setWallpaper', 'settled')
+    } catch (e) {
+      window.webContents.send('setWallpaper', 'faild')
+    }
   })
 }
