@@ -1,13 +1,13 @@
 <template>
-  <v-app-bar class="app_header drag-area" flat>
-    <div class="d-flex align-center no-drag-area">
-      <window-control v-if="isShowWindowControl" />
-    </div>
+  <v-app-bar class="app_header px-2 drag-area" flat height="56">
     <div class="append d-flex no-drag-area">
       <b-f-btn />
       <reload-btn />
       <!-- <theme-toggle /> -->
-      <control-center-toggle class="mr-2" />
+    </div>
+    <div class="d-flex align-center no-drag-area">
+      <control-center-toggle />
+      <window-control v-if="isShowWindowControl" />
     </div>
   </v-app-bar>
 </template>

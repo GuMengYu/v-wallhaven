@@ -60,6 +60,7 @@ specifiers:
   vue-tsc: ^0.34.11
   vuetify: ^3.0.0-beta.10
   vuetify-ctx-menu: git+https://github.com/GuMengYu/vue3-context-menu.git#v0.0.1
+  wallpaper: ^6.1.1
   webfontloader: ^1.0.0
 
 dependencies:
@@ -70,6 +71,7 @@ dependencies:
   electron-log: 4.4.8
   express: 4.18.1
   http-proxy-middleware: 2.0.6_@types+express@4.17.13
+  wallpaper: 6.1.1
 
 devDependencies:
   '@mdi/js': 6.9.96
@@ -123,7 +125,7 @@ devDependencies:
   vue-toastification: 2.0.0-rc.5_vue@3.2.37
   vue-tsc: 0.34.17_typescript@4.7.4
   vuetify: 3.0.0-beta.10_vayifakn2ttw6fewni6nvgvdqy
-  vuetify-ctx-menu: github.com/GuMengYu/vue3-context-menu/e326bdc014e7f2fa5299d3d30dd2c1a159a6c48f_dbklwwrlgfcgrjdmwks7h7yh44
+  vuetify-ctx-menu: github.com/GuMengYu/vue3-context-menu/e326bdc014e7f2fa5299d3d30dd2c1a159a6c48f_vuetify@3.0.0-beta.10
   webfontloader: 1.6.28
 
 packages:
@@ -1433,10 +1435,10 @@ packages:
     resolution: {integrity: sha512-aZpKjBBLzyxtr4Cmbyi3dl8uRO8SI2PG2MYEKYRZL6pl7IsKP2hJkCYzlD6NjLJlRIAZcFPFjFbJliO74DFf7w==}
     engines: {node: '>=14.0.0'}
     dependencies:
+      7zip-bin: 5.1.1
       '@develar/schema-utils': 2.6.5
       '@electron/universal': 1.2.1
       '@malept/flatpak-bundler': 0.4.0
-      7zip-bin: 5.1.1
       async-exit-hook: 2.0.1
       bluebird-lst: 1.0.9
       builder-util: 23.0.9
@@ -1702,9 +1704,9 @@ packages:
   /builder-util/23.0.9:
     resolution: {integrity: sha512-ccPFwI1Sex4yLt8R3LI+H07p2jHICKwEWtxkFkb6jiU/g/VJnF1wazW7I1oMcCFcPTEl30GhqoRv9rfDD9VAiQ==}
     dependencies:
+      7zip-bin: 5.1.1
       '@types/debug': 4.1.7
       '@types/fs-extra': 9.0.13
-      7zip-bin: 5.1.1
       app-builder-bin: 4.0.0
       bluebird-lst: 1.0.9
       builder-util-runtime: 9.0.2
@@ -6130,6 +6132,11 @@ packages:
       vue-i18n: 9.1.10_vue@3.2.37
     dev: true
 
+  /wallpaper/6.1.1:
+    resolution: {integrity: sha512-CWvtaanpICvFOhqr0xlAnAgxHNROK3yGN/vaSnLUyTJmmJ5ipfJpByn1yqCNV22ZNQfXULi1xS/+W9riRMXMjQ==}
+    engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
+    dev: false
+
   /wcwidth/1.0.1:
     resolution: {integrity: sha512-XHPEwS0q6TaxcvG85+8EYkbiCux2XtWG2mkc47Ng2A77BQu9+DqIOJldST4HgPkuea7dvKSj5VgX3P1d4rW8Tg==}
     dependencies:
@@ -6275,17 +6282,14 @@ packages:
     dev: true
     optional: true
 
-  github.com/GuMengYu/vue3-context-menu/e326bdc014e7f2fa5299d3d30dd2c1a159a6c48f_dbklwwrlgfcgrjdmwks7h7yh44:
+  github.com/GuMengYu/vue3-context-menu/e326bdc014e7f2fa5299d3d30dd2c1a159a6c48f_vuetify@3.0.0-beta.10:
     resolution: {tarball: https://codeload.github.com/GuMengYu/vue3-context-menu/tar.gz/e326bdc014e7f2fa5299d3d30dd2c1a159a6c48f}
     id: github.com/GuMengYu/vue3-context-menu/e326bdc014e7f2fa5299d3d30dd2c1a159a6c48f
     name: vuetify-ctx-menu
     version: 0.0.1
+    peerDependencies:
+      vuetify: next
     dependencies:
       vue: 3.2.37
       vuetify: 3.0.0-beta.10_vayifakn2ttw6fewni6nvgvdqy
-    transitivePeerDependencies:
-      - '@formatjs/intl'
-      - vite-plugin-vuetify
-      - vue-i18n
-      - webpack-plugin-vuetify
     dev: true

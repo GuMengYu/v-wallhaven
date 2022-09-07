@@ -86,11 +86,15 @@ import { useIpcRenderer } from '@vueuse/electron'
 import { useWheel } from '@vueuse/gesture'
 import { throttle } from 'lodash-es'
 import { useContextMenu } from 'vuetify-ctx-menu/lib/main'
+import { getWallpaper } from 'wallpaper'
 
 import type { WALLHAVEN_MODEL } from '@/api/wallhaven'
 import { useFetchWallpapers } from '@/hooks/fetch/useFetchWallpapers'
 import { useCurrentTheme } from '@/hooks/useTheme'
 import { bytesToSize, loadImage, sleep } from '@/util/fn'
+getWallpaper().then((res) => {
+  console.log(res)
+})
 
 const ipcRenderer = useIpcRenderer()
 const contextMenu = useContextMenu()
@@ -239,6 +243,7 @@ function onContextMenu(e: MouseEvent) {
       {
         label: '用作桌面背景',
         onClick: () => {
+          // wallpaper.set(currentWallpaper.value?.path)
           snackbar.value = true
         },
       },
