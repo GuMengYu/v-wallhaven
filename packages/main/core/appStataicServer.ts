@@ -12,7 +12,7 @@ export function useStaticServer() {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'http://localhost:12151',
+      target: 'https://wallhaven.cc/api/v1/',
       changeOrigin: true,
       pathRewrite: (path) => path.replace(/^\/api/, ''),
     }) as express.RequestHandler

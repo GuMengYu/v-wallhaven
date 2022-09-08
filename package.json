@@ -30,7 +30,7 @@
     "electron-log": "^4.4.7",
     "express": "^4.17.3",
     "http-proxy-middleware": "^2.0.6",
-    "wallpaper": "^6.1.1"
+    "wallpaper": "^5.0.1"
   },
   "devDependencies": {
     "@mdi/js": "^6.5.95",

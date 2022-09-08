@@ -51,4 +51,8 @@ function registerIpcRenderer() {
   ipcRenderer.on('windowState', (e, state) => {
     appStore.$state.windowState = state
   })
+
+  ipcRenderer.on('setWallpaper', (e, state) => {
+    appStore.$state.setwallpaper = state
+  })
 }
